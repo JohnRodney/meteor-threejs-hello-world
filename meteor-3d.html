@@ -1,0 +1,91 @@
+<head>
+  <title>meteor-3d</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  {{> header}}
+  <div id="page">
+  {{> parallax}}
+  </div>
+  <div id="render-target">
+  </div>
+</body>
+
+<template name="header">
+  <div id='header' class='teal'>
+    <h1>Hello World</h1><button class='btn waves-effect waves-teal light-blue lighten-3' onClick='Meteor.forNerds()'>For Nerds</button>
+  </div>
+</template>
+
+<template name='parallax'>
+  <div class="parallax-container">
+    <div class="parallax"></div>
+  </div>
+  <div class="section par-body">
+    <div class="row container">
+      <h4 class="header grey-text-darken-3">Meteor, threejs, materialize .. oh my</h4>
+      <p class="grey-text text-darken-3 lighten-3">A morning of playing around with threejs for the first
+      time has left me like a kid in a candy shop wanting more. Performance out of the box is great due to their
+      responsibile usage of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">window.requestAnimationFrame().</a></p>
+      <p class="grey-text text-darken-3 lighten-3">This function will request that your functions be processed
+      on the next animation frame of the browser so that your code can stay in sync with the render engine.</p>
+      <h5 class="header grey-text-darken-3">Meteor</h5>
+      <p class="grey-text text-darken-3 lighten-3">If you haven't learned about meteor yet make sure to visit
+      their <a href="https://www.meteor.com/">website</a>. It is really easy to get started if you are already comfortable
+      with javascript, html, css, and a javascript framework. Next you can pickup a threejs plugin for meteor. I used
+      infinitedg:three, but there are plenty of other solutions on atmosphere. To install this package simply type:
+      <blockquote>meteor add infinitedg:three</blockquote></p>
+    </div>
+  </div>
+  <div class="parallax-container">
+    <div class="parallax"></div>
+  </div>
+  <div class="section par-body">
+    <div class="row container">
+       <h5 class="header grey-text-darken-3">ThreeJS</h5>
+        <p class="grey-text text-darken-3 lighten-3">After that is added to your project you can then create a folder on client and follow any basic threejs tutorial.
+        I found this tutorial on <a href="http://aerotwist.com/tutorials/getting-started-with-three-js/">Starting ThreeJS</a>
+        very helpful for setting up an intial scene and getting an object to render in it. Don't forget to stop by
+        the <a href="http://threejs.org">threejs</a> main website for some inspiration on what is possible with this
+        amazing javascript library</p>
+        <p>After you can render a basic scene I found a new<a href="http://learningthreejs.com/blog/2013/09/16/how-to-make-the-earth-in-webgl/">
+        tutorial</a> on how to build a planet out of the sphere that
+        the previous tutorial explained how to create.</p>
+        <h5 class="header grey-text-darken-3">Events</h5>
+        <p>Now what is a webpage without interaction?? So I added some basic event listeners to the canvas. 
+        Excuse the dirty code it was just thrown
+        together:
+        <blockquote>
+          // custom events<br>
+          var canvas = document.getElementById('render-target')<br>
+          function StartListen(eventname){<br>
+          &nbsp;&nbsp; canvas.addEventListener(eventname, function(e){<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;    e.preventDefault();<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;     toRotate = false;<br>
+          &nbsp;&nbsp;   });<br>
+          &nbsp;  }<br>
+          function DuringEvent(eventname){<br>
+          &nbsp;&nbsp; canvas.addEventListener(eventname, function(e){<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;  if(!toRotate){<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    calculateRotation(e);<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;    }<br>
+          &nbsp;&nbsp;  });<br>
+          }<br>
+          function EndEvent(eventname){<br>
+          &nbsp;&nbsp;   canvas.addEventListener(eventname, function(e){<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;    e.preventDefault();<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;    toRotate = true;<br>
+          &nbsp;&nbsp; });<br>
+          }<br>
+          StartListen('touchstart');<br>
+          StartListen('mousedown');<br>
+          DuringEvent('touchmove');<br>
+          DuringEvent('mousemove');<br>
+          EndEvent('mouseup');<br>
+          EndEvent('touchend');<br>
+        </blockquote>
+        </p>
+    </div>
+  </div>
+
+</template>
