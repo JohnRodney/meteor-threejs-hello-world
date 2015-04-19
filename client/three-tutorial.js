@@ -109,10 +109,13 @@ $(document).ready(function(){
             };
   })();
   // custom events
+  var startX;
+  var startY;
   var canvas = document.getElementById('render-target')
   function StartListen(eventname){
     canvas.addEventListener(eventname, function(e){
       e.preventDefault();
+      setStartCoords(e);
       toRotate = false;
     });
   }
@@ -156,6 +159,20 @@ $(document).ready(function(){
       rotateX(0.004);
     }
   }
+  function setStartCoords(e){
+    var x, y;
+    if(typeof(e.changedTouches) !== 'undefined'){
+      x = e.changedTouches[0].pageX;
+      y = e.changedTouches[0].pageY;
+    }
+    else{
+      x = e.clientX;
+      y = e.clientY;
+    }
+    startX = x;
+    startY = y;
+  }
+
   function calculateRotation(e){
     var x, y;
     if(typeof(e.changedTouches) !== 'undefined'){
@@ -166,8 +183,8 @@ $(document).ready(function(){
       x = e.clientX;
       y = e.clientY;
     }
-    rotateX((x-(WIDTH/2))*.0001);
-    rotateY((y-(HEIGHT/2))*.0001);
+    rotateX((x-(startX))*.0001);
+    rotateY((y-(startY))*.0001);
   }
   function rotateX(val){
     sphere.rotation.y  += val;
