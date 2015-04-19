@@ -63,7 +63,7 @@ $(document).ready(function(){
   Meteor.applyTexture = {};
   Meteor.applyTexture.venus = function(){
     sphereMaterial.map = THREE.ImageUtils.loadTexture('images/venusmap.jpg');
-    sphereMaterial.bumpmap = THREE.ImageUtils.loadTexture('images/venusbump.jpg')
+    sphereMaterial.bumpMap = THREE.ImageUtils.loadTexture('images/venusbump.jpg');
     sphereMaterial.bumpScale = 1;
     sphereMaterial.specularMap    = THREE.ImageUtils.loadTexture('images/venusspec.jpg');
     sphereMaterial.specular  = new THREE.Color('grey');
