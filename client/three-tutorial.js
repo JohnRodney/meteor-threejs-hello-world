@@ -1,11 +1,15 @@
 $(document).ready(function(){
+  $(".button-collapse").sideNav();
+  // Initialize collapsible (uncomment the line below if you use the dropdown variation)
+  $('.collapsible').collapsible();
+
   var WIDTH = $(window).width();
   var HEIGHT = $(window).height();
   var VIEW_ANGLE = 45,
     ASPECT = WIDTH / HEIGHT,
     NEAR = 0.1,
     FAR = 10000;
-
+  var loader = new THREE.JSONLoader();
   var Canvas = $('#viewport');
   var renderer = new THREE.WebGLRenderer();
   var camera = new THREE.PerspectiveCamera(
@@ -19,7 +23,6 @@ $(document).ready(function(){
   camera.position.z = 300;
   renderer.setSize(WIDTH, HEIGHT);
   $('#render-target').append(renderer.domElement);
-
 
   var geometry   = new THREE.SphereGeometry(0.5, 32, 32);
   var material  = new THREE.MeshPhongMaterial();
@@ -57,6 +60,83 @@ $(document).ready(function(){
   sphereMaterial.bumpScale = 1;
   sphereMaterial.specularMap    = THREE.ImageUtils.loadTexture('images/earthspec1k.jpg');
   sphereMaterial.specular  = new THREE.Color('grey');
+  Meteor.applyTexture = {};
+  Meteor.applyTexture.venus = function(){
+    sphereMaterial.map = THREE.ImageUtils.loadTexture('images/venusmap.jpg');
+    sphereMaterial.bumpmap = THREE.ImageUtils.loadTexture('images/venusbump.jpg')
+    sphereMaterial.bumpScale = 1;
+    sphereMaterial.specularMap    = THREE.ImageUtils.loadTexture('images/venusspec.jpg');
+    sphereMaterial.specular  = new THREE.Color('grey');
+    earthMesh.remove(cloudMesh);
+  }
+  Meteor.applyTexture.earth = function(){
+    sphereMaterial.map    = THREE.ImageUtils.loadTexture('images/earthmap1k.jpg');
+    sphereMaterial.bumpMap    = THREE.ImageUtils.loadTexture('images/earthbump1k.jpg');
+    sphereMaterial.bumpScale = 1;
+    sphereMaterial.specularMap    = THREE.ImageUtils.loadTexture('images/earthspec1k.jpg');
+    sphereMaterial.specular  = new THREE.Color('grey');
+    earthMesh.add(cloudMesh);
+  }
+  Meteor.applyTexture.jupiter = function(){
+    sphereMaterial.map    = THREE.ImageUtils.loadTexture('images/jupitermap.jpg');
+    sphereMaterial.bumpMap    = THREE.ImageUtils.loadTexture('images/jupiterbump.jpg');
+    sphereMaterial.bumpScale = 1;
+    sphereMaterial.specularMap    = THREE.ImageUtils.loadTexture('images/jupiterspec.jpg');
+    sphereMaterial.specular  = new THREE.Color('grey');
+    earthMesh.remove(cloudMesh);
+  }
+  Meteor.applyTexture.pluto = function(){
+    sphereMaterial.map    = THREE.ImageUtils.loadTexture('images/plutomap1k.jpg');
+    sphereMaterial.bumpMap    = THREE.ImageUtils.loadTexture('images/plutobump1k.jpg');
+    sphereMaterial.bumpScale = 1;
+    sphereMaterial.specularMap    = THREE.ImageUtils.loadTexture('images/plutospec1k.jpg');
+    sphereMaterial.specular  = new THREE.Color('grey');
+    earthMesh.remove(cloudMesh);
+  }
+  Meteor.applyTexture.neptune = function(){
+    sphereMaterial.map    = THREE.ImageUtils.loadTexture('images/neptunemap.jpg');
+    sphereMaterial.bumpMap    = THREE.ImageUtils.loadTexture('images/neptunebump.jpg');
+    sphereMaterial.bumpScale = 1;
+    sphereMaterial.specularMap    = THREE.ImageUtils.loadTexture('images/neptunespec.jpg');
+    sphereMaterial.specular  = new THREE.Color('grey');
+    earthMesh.remove(cloudMesh);
+  }
+  Meteor.applyTexture.uranus = function(){
+    sphereMaterial.map    = THREE.ImageUtils.loadTexture('images/uranusmap.jpg');
+    sphereMaterial.bumpMap    = THREE.ImageUtils.loadTexture('images/uranusbump.jpg');
+    sphereMaterial.bumpScale = 1;
+    sphereMaterial.specularMap    = THREE.ImageUtils.loadTexture('images/uranusspec.jpg');
+    sphereMaterial.specular  = new THREE.Color('grey');
+    earthMesh.remove(cloudMesh);
+  }
+  Meteor.applyTexture.saturn = function(){
+    sphereMaterial.map    = THREE.ImageUtils.loadTexture('images/saturnmap.jpg');
+    sphereMaterial.bumpMap    = THREE.ImageUtils.loadTexture('images/saturnbump.jpg');
+    sphereMaterial.bumpScale = 1;
+    sphereMaterial.specularMap    = THREE.ImageUtils.loadTexture('images/saturnspec.jpg');
+    sphereMaterial.specular  = new THREE.Color('grey');
+    earthMesh.remove(cloudMesh);
+  }
+  Meteor.applyTexture.mercury = function(){
+    sphereMaterial.map    = THREE.ImageUtils.loadTexture('images/mercurymap.jpg');
+    sphereMaterial.bumpMap    = THREE.ImageUtils.loadTexture('images/mercurybump.jpg');
+    sphereMaterial.bumpScale = 1;
+    sphereMaterial.specularMap    = THREE.ImageUtils.loadTexture('images/mercuryspec.jpg');
+    sphereMaterial.specular  = new THREE.Color('grey');
+    earthMesh.remove(cloudMesh);
+  }
+  Meteor.applyTexture.mars = function(){
+    sphereMaterial.map    = THREE.ImageUtils.loadTexture('images/marsmap.jpg');
+    sphereMaterial.bumpMap    = THREE.ImageUtils.loadTexture('images/marsbump.jpg');
+    sphereMaterial.bumpScale = 1;
+    sphereMaterial.specularMap    = THREE.ImageUtils.loadTexture('images/marsspec.jpg');
+    sphereMaterial.specular  = new THREE.Color('grey');
+    earthMesh.remove(cloudMesh);
+  }
+
+
+
+
 
   var canvasCloud = THREE.ImageUtils.loadTexture('images/earthcloudmap.jpg');
   var geometry   = new THREE.SphereGeometry(radius, segments, rings);

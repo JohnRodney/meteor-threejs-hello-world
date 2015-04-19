@@ -8,8 +8,27 @@
   {{> parallax}}
   </div>
   <div id="render-target">
+  {{> planets}}
   </div>
 </body>
+
+<template name='planets'>
+  <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large blue" onClick='Meteor.applyTexture.earth()'>
+      E
+    </a>
+    <ul>
+      <li><a class="btn-floating red" onClick="Meteor.applyTexture.mercury()">Me</a></li>
+      <li><a class="btn-floating red" onClick="Meteor.applyTexture.venus()">V</a></li>
+      <li><a class="btn-floating red" onClick="Meteor.applyTexture.mars()">Ma</a></li>
+      <li><a class="btn-floating red" onClick="Meteor.applyTexture.jupiter()">J</a></li>
+      <li><a class="btn-floating red" onClick="Meteor.applyTexture.saturn()">S</a></li>
+      <li><a class="btn-floating red" onClick="Meteor.applyTexture.uranus()">U</a></li>
+      <li><a class="btn-floating red" onClick="Meteor.applyTexture.neptune()">N</a></li>
+      <li><a class="btn-floating red" onClick="Meteor.applyTexture.pluto()">P</a></li>
+    </ul>
+  </div>
+</template>
 
 <template name="header">
   <div id='header' class='teal'>
