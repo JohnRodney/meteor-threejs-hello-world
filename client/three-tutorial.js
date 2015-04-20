@@ -32,8 +32,8 @@ $(document).ready(function(){
 
   // set up the sphere vars
   var radius = 50,
-      segments = 16,
-      rings = 16;
+      segments = 32,
+      rings = 32;
   var sphereMaterial =
     new THREE.MeshPhongMaterial(
     {
